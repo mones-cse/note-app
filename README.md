@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# note-web-app (personal use)
+## Description:
+## Objective:
+Build a React app that is functionally similar to the given assets. Fulfill the below user stories with identical designs. You can also use any other library or framework to achieve the desired output.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## User Story
 
-## Available Scripts
+- User Story #1: User can add, update, read, delete notes. Each note will contain
+  1 header section and a note section.
+- User Story #2: User can choose the note color during creation or update.
+- User Story #3: User can mark any note as favorite.
+- User Story #4: User can filter favorite notes using the top left star icon in
+  the sidebar.
+- User Story #5: User can search with the header name. Search should show results
+  for partial header input.
+- User Story #6: User can’t add more than 30 notes.
+- User Story #7: note contain can’t be more than 1000 characters.
+- User Story #8: note header can’t be more than 100 characters.
+- User Story #9: make data persistence using local storage. (so that after
+  reloading data still show on the browser)
+- User Story #10: add custom color picker besides color picker
 
-In the project directory, you can run:
+## Instructions
 
-### `yarn start`
+- For grid use bootstrap 5
+- For modal use [react-modal](https://www.npmjs.com/package/react-modal)
+- For central data management use react context api
+- For color switch use pure css
+- For custom color picker use :  [react-color](https://casesandberg.github.io/react-color/)
+- Suggested folder structure: [outline](https://github.com/outline/outline)
+- For icon : [react-icons](https://react-icons.github.io/react-icons/search)
+- For toaster use: [react-toastify](https://www.npmjs.com/package/react-toastify)
+- For date format use just js
+- hooks might need to use useState, useEffect, useContext, useRef
+- For from validation use: [validator](https://www.npmjs.com/package/validator)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Design:
+[figma file](https://www.figma.com/file/IvOfFOSJV4ZsLtMpXAk4jz/Notes?node-id=0%3A1)
