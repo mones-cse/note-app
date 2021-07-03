@@ -25,7 +25,7 @@ Build a React app that is functionally similar to the given assets. Fulfill the 
 - For grid use bootstrap 5
 - For modal use [react-modal](https://www.npmjs.com/package/react-modal)
 - For central data management use react context api
-- For color switch use pure css
+- For color switch use pu re css
 - For custom color picker use :  [react-color](https://casesandberg.github.io/react-color/)
 - Suggested folder structure: [outline](https://github.com/outline/outline)
 - For icon : [react-icons](https://react-icons.github.io/react-icons/search)

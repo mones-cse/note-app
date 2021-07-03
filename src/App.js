@@ -1,12 +1,16 @@
 import "./App.css";
+import Sidebar from "./components/Sidebar/Sidebar";
+import NotesProvider from "./context/NotesProvider";
 
 function App() {
     return (
-        <div className="App">
-            <div className={"text-center bg-dark text-light min-vh-100"}>
-                <h3>Hello world!!!</h3>
+        <NotesProvider>
+            <div className="App">
+                <div className={"text-center bg-dark text-light min-vh-100"}>
+                    <Sidebar />
+                </div>
             </div>
-        </div>
+        </NotesProvider>
     );
 }
 
