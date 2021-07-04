@@ -7,7 +7,7 @@ import NotesContext from "../../context/NotesContext";
 
 Modal.setAppElement("#root");
 
-const NoteModal = ({ isModalOpen, closeModal }) => {
+const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
     const noteCtx = useContext(NotesContext);
     const [color, setColor] = useState("#FFC971");
     const [noteTitle, setNoteTitle] = useState("");
@@ -23,8 +23,13 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
         note.noteDetails = noteDetails;
         note.isNoteStar = isNoteStar;
         note.lastUpdateDate = currentDate.toString();
-        console.log({ note });
-        noteCtx.addNote(note);
+        if(isTypeUpdate){
+            note.id= selectedNote.id;
+            noteCtx.updateNote(note);
+        }else{
+            noteCtx.addNote(note);
+        }
+
     };
 
     const customStyles = {
@@ -48,7 +53,14 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
         closeModal(false);
     };
     const afterOpenModal = () => {
-        console.log("after modal open");
+
+        if(isTypeUpdate){
+            console.log("after modal open",selectedNote);
+            setColor(selectedNote.color);
+            setIsNoteStar(selectedNote.isNoteStar);
+            setNoteTitle(selectedNote.noteTitle);
+            setNoteDetails(selectedNote.noteDetails);
+        }
     };
 
     return (
@@ -118,9 +130,16 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
                     <div className={"mb-3 d-flex"}>
                         <ColorPickers color={color} setColor={setColor} />
                         <div className={"ms-auto"}>
-                            <button className={"btn btn-lg btn-dark"}>
-                                Save
-                            </button>
+                            {isTypeUpdate?
+                                <button className={"btn btn-lg btn-dark"}>
+                                    Update
+                                </button>
+                                :
+                                <button className={"btn btn-lg btn-dark"}>
+                                    Save
+                                </button>
+                            }
+
                         </div>
                     </div>
                 </form>

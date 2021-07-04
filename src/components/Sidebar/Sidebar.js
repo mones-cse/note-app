@@ -30,7 +30,7 @@ const Sidebar = () => {
                 size="58px"
                 onClick={() => noteCtx.toggleFav()}
             />
-            <NoteModal isModalOpen={isModalOpen} closeModal={closeModal} />
+            <NoteModal isModalOpen={isModalOpen} closeModal={closeModal} isTypeUpdate={false}/>
         </div>
     );
 };

@@ -7,30 +7,26 @@ const Dashboard = () => {
     const noteCtx = useContext(NotesContext);
     const { notes } = noteCtx;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedNote,setSelectedNote] = useState();
     const openModal = () => {
         setIsModalOpen(true);
     };
     const closeModal = () => {
         setIsModalOpen(false);
     };
-    console.log(notes);
+    const noteModalHandler = (note) =>{
+        setSelectedNote(note);
+        openModal();
+    };
 
     return (
-        <div className={"col-11"}>
-            {/*<button onClick={openModal}>Update</button>*/}
-            {/*<NoteModal*/}
-            {/*    isModalOpen={isModalOpen}*/}
-            {/*    closeModal={closeModal}*/}
-            {/*    data={{ a: "some data" }}*/}
-            {/*/>*/}
-
-            <div className={"container-fluid"}>
+        <div className={"col-11 container-fluid "}>
                 <div className={"row gx-3"}>
                     {notes.map(note => (
-                        <Note key={note.id} note={note}/>
+                        <Note key={note.id} note={note} openModal={openModal} noteModalHandler={noteModalHandler}/>
                     ))}
                 </div>
-            </div>
+            <NoteModal isModalOpen={isModalOpen}  closeModal={closeModal} isTypeUpdate={true} selectedNote={selectedNote}/>
         </div>
     );
 };
