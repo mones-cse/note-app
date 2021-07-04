@@ -1,32 +1,44 @@
-import React,{useContext,useState} from "react";
+import React, { useContext, useState } from "react";
 import { GiAlliedStar } from "react-icons/gi";
 import { FiTrash } from "react-icons/fi";
 import { RiEditCircleFill } from "react-icons/ri";
 import "./note.scss";
 import NotesContext from "../../../context/NotesContext";
+import TextTruncate from "react-text-truncate";
 
-
-
-const Note = ({note,noteModalHandler}) => {
+const Note = ({ note, noteModalHandler }) => {
     const notesCtx = useContext(NotesContext);
-    const lastUpdatedDate =new Date(note.lastUpdateDate).toDateString();
+    const lastUpdatedDate = new Date(note.lastUpdateDate).toDateString();
     // const test = ()=>{ open};
     return (
-        <div className={"note-container col-lg-4 col-md-6"} >
-            <div className={"card"} style={{backgroundColor:note.color}}>
+        <div className={"note-container col-lg-4 col-md-6"}>
+            <div className={"card"} style={{ backgroundColor: note.color }}>
                 <div className={"card-body"}>
-                    {note.isNoteStar && <GiAlliedStar className={"note-star"} />}
+                    {note.isNoteStar && (
+                        <GiAlliedStar className={"note-star"} />
+                    )}
                     <p className={"note-title"}>{note.noteTitle}</p>
-                    <p className={"note-body"}>
-                        {note.noteDetails}
-                    </p>
-                    {/*<p className={"note-date"}>{note.lastUpdateDate.toDateString()}</p>*/}
+                    {/*<p className={"note-body text-"}> {note.noteDetails} </p>*/}
+
+                    <TextTruncate
+                        className={"note-body"}
+                        line={7}
+                        element="span"
+                        truncateText="…"
+                        text={note.noteDetails}
+                    />
+
                     <p className={"note-date"}>{lastUpdatedDate}</p>
-                    <FiTrash className={"note-delete"} onClick={()=>notesCtx.deleteNote(note.id)}/>
-                    <RiEditCircleFill className={"note-update"} onClick ={()=>noteModalHandler(note)} />
+                    <FiTrash
+                        className={"note-delete"}
+                        onClick={() => notesCtx.deleteNote(note.id)}
+                    />
+                    <RiEditCircleFill
+                        className={"note-update"}
+                        onClick={() => noteModalHandler(note)}
+                    />
                 </div>
             </div>
-
         </div>
     );
 };

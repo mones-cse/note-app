@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import Modal from "react-modal";
 import { IoCloseSharp } from "react-icons/io5";
 import ColorPickers from "../ColorPicker/ColorPicker";
@@ -7,7 +7,7 @@ import NotesContext from "../../context/NotesContext";
 
 Modal.setAppElement("#root");
 
-const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
+const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
     const noteCtx = useContext(NotesContext);
     const [color, setColor] = useState("#FFC971");
     const [noteTitle, setNoteTitle] = useState("");
@@ -23,13 +23,12 @@ const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
         note.noteDetails = noteDetails;
         note.isNoteStar = isNoteStar;
         note.lastUpdateDate = currentDate.toString();
-        if(isTypeUpdate){
-            note.id= selectedNote.id;
+        if (isTypeUpdate) {
+            note.id = selectedNote.id;
             noteCtx.updateNote(note);
-        }else{
+        } else {
             noteCtx.addNote(note);
         }
-
     };
 
     const customStyles = {
@@ -53,9 +52,8 @@ const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
         closeModal(false);
     };
     const afterOpenModal = () => {
-
-        if(isTypeUpdate){
-            console.log("after modal open",selectedNote);
+        if (isTypeUpdate) {
+            console.log("after modal open", selectedNote);
             setColor(selectedNote.color);
             setIsNoteStar(selectedNote.isNoteStar);
             setNoteTitle(selectedNote.noteTitle);
@@ -91,7 +89,8 @@ const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
                         />
                         {/*<div id="" className="form-text">We'll never share your email with anyone else.</div>*/}
                     </div>
-                    <div className="mb-3">
+                    {/*todo why on earth height 185px to 190px cause blurry effect*/}
+                    <div className="mb-3" style={{ height: "185px" }}>
                         <label
                             htmlFor="noteTitleDetails"
                             className="form-label"
@@ -100,9 +99,9 @@ const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
                         </label>
                         <textarea
                             type="text"
-                            className="form-control"
+                            className="form-control "
                             id="noteTitleDetails"
-                            style={{ minHeight: "158px" }}
+                            style={{ height: "158px" }}
                             value={noteDetails}
                             onChange={event =>
                                 setNoteDetails(event.target.value)
@@ -130,16 +129,15 @@ const NoteModal = ({ isModalOpen, closeModal ,isTypeUpdate ,selectedNote}) => {
                     <div className={"mb-3 d-flex"}>
                         <ColorPickers color={color} setColor={setColor} />
                         <div className={"ms-auto"}>
-                            {isTypeUpdate?
+                            {isTypeUpdate ? (
                                 <button className={"btn btn-lg btn-dark"}>
                                     Update
                                 </button>
-                                :
+                            ) : (
                                 <button className={"btn btn-lg btn-dark"}>
                                     Save
                                 </button>
-                            }
-
+                            )}
                         </div>
                     </div>
                 </form>
