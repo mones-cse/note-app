@@ -5,6 +5,7 @@ import { RiEditCircleFill } from "react-icons/ri";
 import "./note.scss";
 
 const Note = ({note}) => {
+    const lastUpdatedDate =new Date(note.lastUpdateDate).toDateString();
     return (
         <div className={"note-container col-lg-4 col-md-6"} >
             <div className={"card"} style={{backgroundColor:note.color}}>
@@ -15,7 +16,8 @@ const Note = ({note}) => {
                     <p className={"note-body"}>
                         {note.noteDetails}
                     </p>
-                    <p className={"note-date"}>{note.lastUpdateDate.toDateString()}</p>
+                    {/*<p className={"note-date"}>{note.lastUpdateDate.toDateString()}</p>*/}
+                    <p className={"note-date"}>{lastUpdatedDate}</p>
                     <FiTrash className={"note-delete"} />
                     <RiEditCircleFill className={"note-update"} />
                 </div>

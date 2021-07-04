@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import NotesContext from "./NotesContext";
 
 const NotesProvider = props => {
     const [isFavOn, setIsFavOn] = useState(false);
     const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        let temp = localStorage.getItem('notes');
+        temp =JSON.parse(temp);
+        if (temp){
+            setNotes(temp);
+        }
+    }, []);
+
+    useEffect(()=>{
+        localStorage.setItem('notes',JSON.stringify(notes));
+    },[notes]);
+
     return (
         <NotesContext.Provider
             value={{

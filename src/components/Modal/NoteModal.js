@@ -22,7 +22,7 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
         note.noteTitle = noteTitle;
         note.noteDetails = noteDetails;
         note.isNoteStar = isNoteStar;
-        note.lastUpdateDate = currentDate;
+        note.lastUpdateDate = currentDate.toString();
         console.log({ note });
         noteCtx.addNote(note);
     };
