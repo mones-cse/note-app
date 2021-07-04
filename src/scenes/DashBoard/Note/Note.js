@@ -17,16 +17,26 @@ const Note = ({ note, noteModalHandler }) => {
                     {note.isNoteStar && (
                         <GiAlliedStar className={"note-star"} />
                     )}
-                    <p className={"note-title"}>{note.noteTitle}</p>
+                    {/*<p className={"note-title"}>{note.noteTitle}</p>*/}
+                    <div  className={"note-title"}>
+                        <TextTruncate
+                            line={1}
+                            element="span"
+                            truncateText="…"
+                            text={note.noteTitle}
+                        />
+                    </div>
                     {/*<p className={"note-body text-"}> {note.noteDetails} </p>*/}
+                    <div  className={"note-body"}>
+                        <TextTruncate
 
-                    <TextTruncate
-                        className={"note-body"}
-                        line={7}
-                        element="span"
-                        truncateText="…"
-                        text={note.noteDetails}
-                    />
+                            line={6}
+                            element="span"
+                            truncateText="…"
+                            text={note.noteDetails}
+                        />
+                    </div>
+
 
                     <p className={"note-date"}>{lastUpdatedDate}</p>
                     <FiTrash

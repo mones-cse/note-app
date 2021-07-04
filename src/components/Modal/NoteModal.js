@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
 import { IoCloseSharp } from "react-icons/io5";
 import ColorPickers from "../ColorPicker/ColorPicker";
 import "./NoteModal.scss";
 import NotesContext from "../../context/NotesContext";
+import validator from "validator";
 
 Modal.setAppElement("#root");
 
@@ -14,6 +15,9 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
     const [noteDetails, setNoteDetails] = useState("");
     const [isNoteStar, setIsNoteStar] = useState(false);
     const currentDate = new Date();
+
+    const [noteTitleError, setNoteTitleError] = useState("");
+    const [noteDetailsError, setNoteDetailsError] = useState("");
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -61,6 +65,26 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         }
     };
 
+    useEffect(() => {
+        if (!validator.isLength(noteTitle, { min: 1, max: 100 })) {
+            setNoteTitleError("Title length can't be more than 100");
+        } else {
+            setNoteTitleError("");
+        }
+        if (!validator.isLength(noteDetails, { min: 1, max: 1000 })) {
+            setNoteDetailsError("Details length can't be more than 1000");
+        } else {
+            setNoteDetailsError("");
+        }
+    }, [noteTitle, noteDetails]);
+
+    const disabled = () => {
+        if (noteTitleError.length > 0 || noteDetailsError.length > 0) {
+            return "btn btn-lg btn-dark disabled";
+        }
+        return "btn btn-lg btn-dark";
+    };
+
     return (
         <Modal
             isOpen={isModalOpen}
@@ -87,10 +111,14 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                             value={noteTitle}
                             onChange={event => setNoteTitle(event.target.value)}
                         />
-                        {/*<div id="" className="form-text">We'll never share your email with anyone else.</div>*/}
+                        {noteTitleError.length > 0 && (
+                            <div id="" className="form-text text-danger">
+                                {noteTitleError}
+                            </div>
+                        )}
                     </div>
                     {/*todo why on earth height 185px to 190px cause blurry effect*/}
-                    <div className="mb-3" style={{ height: "185px" }}>
+                    <div className="mb-3" style={{ height: "195px" }}>
                         <label
                             htmlFor="noteTitleDetails"
                             className="form-label"
@@ -107,6 +135,11 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                                 setNoteDetails(event.target.value)
                             }
                         />
+                        {noteDetailsError.length > 0 && (
+                            <div id="" className="form-text text-danger">
+                                {noteDetailsError}
+                            </div>
+                        )}
                     </div>
                     <div className="mb-4 form-check">
                         <input
@@ -130,13 +163,9 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                         <ColorPickers color={color} setColor={setColor} />
                         <div className={"ms-auto"}>
                             {isTypeUpdate ? (
-                                <button className={"btn btn-lg btn-dark"}>
-                                    Update
-                                </button>
+                                <button className={disabled()}>Update</button>
                             ) : (
-                                <button className={"btn btn-lg btn-dark"}>
-                                    Save
-                                </button>
+                                <button className={disabled()}>Save</button>
                             )}
                         </div>
                     </div>
