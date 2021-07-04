@@ -1,24 +1,27 @@
-import React from "react";
+import React,{useContext} from "react";
 import { GiAlliedStar } from "react-icons/gi";
 import { FiTrash } from "react-icons/fi";
 import { RiEditCircleFill } from "react-icons/ri";
 import "./note.scss";
+import NotesContext from "../../../context/NotesContext";
+
 
 const Note = ({note}) => {
+    const notesCtx = useContext(NotesContext);
+
     const lastUpdatedDate =new Date(note.lastUpdateDate).toDateString();
     return (
         <div className={"note-container col-lg-4 col-md-6"} >
             <div className={"card"} style={{backgroundColor:note.color}}>
                 <div className={"card-body"}>
-                    <GiAlliedStar className={"note-star"} />
-
+                    {note.isNoteStar && <GiAlliedStar className={"note-star"} />}
                     <p className={"note-title"}>{note.noteTitle}</p>
                     <p className={"note-body"}>
                         {note.noteDetails}
                     </p>
                     {/*<p className={"note-date"}>{note.lastUpdateDate.toDateString()}</p>*/}
                     <p className={"note-date"}>{lastUpdatedDate}</p>
-                    <FiTrash className={"note-delete"} />
+                    <FiTrash className={"note-delete"} onClick={()=>notesCtx.deleteNote(note.id)}/>
                     <RiEditCircleFill className={"note-update"} />
                 </div>
             </div>

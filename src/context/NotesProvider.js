@@ -31,6 +31,15 @@ const NotesProvider = props => {
                     temp.id = uuidv4();
                     setNotes(notes => [...notes, temp]);
                 },
+                deleteNote: id =>{
+                    console.log('delete note called',id);
+                    let tempNotes = [...notes];
+                    const noteIndex = tempNotes.findIndex(each => each.id ===id);
+                    if(noteIndex !=-1){
+                        tempNotes.splice(noteIndex,1);
+                        setNotes(notes=>tempNotes);
+                    }
+                }
             }}
         >
             {props.children}
