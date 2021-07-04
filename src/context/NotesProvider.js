@@ -22,6 +22,7 @@ const NotesProvider = props => {
         <NotesContext.Provider
             value={{
                 notes: notes,
+                isFavOn:isFavOn,
                 toggleFav: () => {
                     setIsFavOn(!isFavOn);
                 },
