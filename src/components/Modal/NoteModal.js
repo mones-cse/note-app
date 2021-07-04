@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Modal from "react-modal";
 import { IoCloseSharp } from "react-icons/io5";
 import ColorPickers from "../ColorPicker/ColorPicker";
 import "./NoteModal.scss";
+import NotesContext from "../../context/NotesContext";
 
 Modal.setAppElement("#root");
 
 const NoteModal = ({ isModalOpen, closeModal }) => {
+    const noteCtx = useContext(NotesContext);
     const [color, setColor] = useState("#FFC971");
+    const [noteTitle, setNoteTitle] = useState("");
+    const [noteDetails, setNoteDetails] = useState("");
+    const [isNoteStar, setIsNoteStar] = useState(false);
+    const currentDate = new Date();
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const note = {};
+        note.color = color;
+        note.noteTitle = noteTitle;
+        note.noteDetails = noteDetails;
+        note.isNoteStar = isNoteStar;
+        note.lastUpdateDate = currentDate;
+        console.log({ note });
+        noteCtx.addNote(note);
+    };
 
     const customStyles = {
         overlay: {
@@ -44,35 +62,39 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
             <div className={"container custom-modal"}>
                 <p className={"w-100 text-center note-title"}>New Note</p>
                 <IoCloseSharp className={"note-close"} onClick={closeModal} />
-                <form>
-                    <p className={"note-date mt-4"}>January 12, 2020</p>
+                <form onSubmit={handleSubmit}>
+                    <p className={"note-date mt-4"}>
+                        {currentDate.toDateString()}
+                    </p>
                     <div className="mb-3">
-                        <label
-                            htmlFor="exampleInputEmail1"
-                            className="form-label"
-                        >
+                        <label htmlFor="noteTitle" className="form-label">
                             Note Title
                         </label>
                         <input
-                            type="email"
+                            type="text"
                             className="form-control"
-                            id="exampleInputEmail1"
-                            aria-describedby="emailHelp"
+                            id="noteTitle"
+                            value={noteTitle}
+                            onChange={event => setNoteTitle(event.target.value)}
                         />
                         {/*<div id="" className="form-text">We'll never share your email with anyone else.</div>*/}
                     </div>
                     <div className="mb-3">
                         <label
-                            htmlFor="exampleInputPassword1"
+                            htmlFor="noteTitleDetails"
                             className="form-label"
                         >
                             Note Details
                         </label>
                         <textarea
-                            type="password"
+                            type="text"
                             className="form-control"
-                            id="exampleInputPassword1"
+                            id="noteTitleDetails"
                             style={{ minHeight: "158px" }}
+                            value={noteDetails}
+                            onChange={event =>
+                                setNoteDetails(event.target.value)
+                            }
                         />
                     </div>
                     <div className="mb-4 form-check">
@@ -80,6 +102,10 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
                             type="checkbox"
                             className="form-check-input"
                             id="exampleCheck1"
+                            checked={isNoteStar}
+                            onChange={() =>
+                                setIsNoteStar(isNoteStar => !isNoteStar)
+                            }
                         />
                         <label
                             className="form-check-label"
@@ -90,12 +116,14 @@ const NoteModal = ({ isModalOpen, closeModal }) => {
                         </label>
                     </div>
                     <div className={"mb-3 d-flex"}>
-                        <ColorPickers color={color} setColor={setColor}/>
+                        <ColorPickers color={color} setColor={setColor} />
                         <div className={"ms-auto"}>
-                            <button className={"btn btn-lg btn-dark"} >Save</button>
+                            <button className={"btn btn-lg btn-dark"}>
+                                Save
+                            </button>
                         </div>
                     </div>
-                                </form>
+                </form>
             </div>
         </Modal>
     );
