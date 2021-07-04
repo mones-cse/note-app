@@ -19,17 +19,19 @@ const Sidebar = () => {
         <div className={"col-1 min-vh-100 text-center border-end"}>
             <img className={"mt-5"} src={Logo} alt="" />
             <br />
-            <AiFillPlusCircle
+            <GiAlliedStar
                 className={"mt-5"}
                 size="48px"
-                onClick={openModal}
-            />
-            <br />
-            <GiAlliedStar
-                className={"mt-2"}
-                size="58px"
                 onClick={() => noteCtx.toggleFav()}
             />
+            <br />
+            <AiFillPlusCircle
+                className={"mt-2"}
+                size="58px"
+                onClick={openModal}
+            />
+
+
             <NoteModal isModalOpen={isModalOpen} closeModal={closeModal} isTypeUpdate={false}/>
         </div>
     );
