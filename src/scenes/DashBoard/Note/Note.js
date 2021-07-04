@@ -4,20 +4,18 @@ import { FiTrash } from "react-icons/fi";
 import { RiEditCircleFill } from "react-icons/ri";
 import "./note.scss";
 
-const Note = () => {
+const Note = ({note}) => {
     return (
-        <div className={"note-container col-lg-4 col-md-6"}>
-            <div className={"card"}>
+        <div className={"note-container col-lg-4 col-md-6"} >
+            <div className={"card"} style={{backgroundColor:note.color}}>
                 <div className={"card-body"}>
                     <GiAlliedStar className={"note-star"} />
 
-                    <p className={"note-title"}>What is Lorem Ipsum?</p>
+                    <p className={"note-title"}>{note.noteTitle}</p>
                     <p className={"note-body"}>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s.
+                        {note.noteDetails}
                     </p>
-                    <p className={"note-date"}>Jan 12. 2021</p>
+                    <p className={"note-date"}>{note.lastUpdateDate.toDateString()}</p>
                     <FiTrash className={"note-delete"} />
                     <RiEditCircleFill className={"note-update"} />
                 </div>

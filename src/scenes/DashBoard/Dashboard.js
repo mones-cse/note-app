@@ -27,7 +27,7 @@ const Dashboard = () => {
             <div className={"container-fluid"}>
                 <div className={"row gx-3"}>
                     {notes.map(note => (
-                        <Note key={note.id} />
+                        <Note key={note.id} note={note}/>
                     ))}
                 </div>
             </div>
