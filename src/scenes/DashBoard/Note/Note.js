@@ -17,7 +17,7 @@ const Note = ({ note, noteModalHandler }) => {
                     {note.isNoteStar && (
                         <GiAlliedStar className={"note-star"} />
                     )}
-                    <p className={"note-title text-truncate"}>{note.noteTitle}</p>
+                    <p className={"note-title text-truncate"} style={{maxWidth: "90%"}}>{note.noteTitle}</p>
                     {/*todo TextTruncate bug*/}
                     {/*<div  className={"note-title vw-100"}>*/}
                     {/*    <TextTruncate*/}
