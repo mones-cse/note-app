@@ -16,7 +16,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
     const [noteTitle, setNoteTitle] = useState("");
     const [noteDetails, setNoteDetails] = useState("");
     const [isNoteStar, setIsNoteStar] = useState(false);
-    const currentDate = new Date();
+    // const currentDate = new Date();
 
     const [isNoteTitleClicked, setIsNoteTitleClicked] = useState(false);
     const [isNoteDetailsClicked, setIsNoteDetailsClicked] = useState(false);
@@ -38,7 +38,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         note.noteTitle = noteTitle;
         note.noteDetails = noteDetails;
         note.isNoteStar = isNoteStar;
-        note.lastUpdateDate = currentDate.toString();
+        note.lastUpdateDate = new Date().toString();
         if (isTypeUpdate) {
             note.id = selectedNote.id;
             noteCtx.updateNote(note);
@@ -134,7 +134,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                 />
                 <form onSubmit={handleSubmit}>
                     <p className={"note-date mt-4"}>
-                        {currentDate.toDateString()}
+                        {new Date().toDateString()}
                     </p>
                     <div className="mb-3">
                         <label htmlFor="noteTitle" className="form-label">

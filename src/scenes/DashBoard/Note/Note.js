@@ -8,8 +8,7 @@ import TextTruncate from "react-text-truncate";
 
 const Note = ({ note, noteModalHandler }) => {
     const notesCtx = useContext(NotesContext);
-    const lastUpdatedDate = new Date(note.lastUpdateDate).toDateString();
-    // const test = ()=>{ open};
+
     return (
         <div className={"note-container col-lg-4 col-md-6"}>
             <div className={"card"} style={{ backgroundColor: note.color }}>
@@ -17,7 +16,12 @@ const Note = ({ note, noteModalHandler }) => {
                     {note.isNoteStar && (
                         <GiAlliedStar className={"note-star"} />
                     )}
-                    <p className={"note-title text-truncate"} style={{maxWidth: "90%"}}>{note.noteTitle}</p>
+                    <p
+                        className={"note-title text-truncate"}
+                        style={{ maxWidth: "90%" }}
+                    >
+                        {note.noteTitle}
+                    </p>
                     {/*todo TextTruncate bug*/}
                     {/*<div  className={"note-title vw-100"}>*/}
                     {/*    <TextTruncate*/}
@@ -28,9 +32,8 @@ const Note = ({ note, noteModalHandler }) => {
                     {/*    />*/}
                     {/*</div>*/}
                     {/*<p className={"note-body text-"}> {note.noteDetails} </p>*/}
-                    <div  className={"note-body"}>
+                    <div className={"note-body"}>
                         <TextTruncate
-
                             line={6}
                             element="span"
                             truncateText="…"
@@ -38,12 +41,13 @@ const Note = ({ note, noteModalHandler }) => {
                         />
                     </div>
 
-
-                    <p className={"note-date"}>{lastUpdatedDate}</p>
+                    <p className={"note-date"}>
+                        {new Date(note.lastUpdateDate).toDateString()}
+                    </p>
                     <FiTrash
                         className={"note-delete"}
                         onClick={() => notesCtx.deleteNote(note.id)}
-                    />
+                    q/>
                     <RiEditCircleFill
                         className={"note-update"}
                         onClick={() => noteModalHandler(note)}
