@@ -37,7 +37,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
             noteCtx.addNote(note);
             notify('Note Added');
         }
-
+        handleCloseModal();
     };
 
     const customStyles = {
@@ -58,8 +58,16 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         },
     };
     const handleCloseModal = () => {
+        stateValueReset();
         closeModal(false);
     };
+    const stateValueReset =()=>{
+        setColor("#FFC971");
+        setNoteTitle("");
+        setNoteDetails("");
+        setIsNoteStar(false);
+    };
+
     const afterOpenModal = () => {
         if (isTypeUpdate) {
             console.log("after modal open", selectedNote);
