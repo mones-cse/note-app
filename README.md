@@ -24,8 +24,7 @@ Build a React app that is functionally similar to the given assets. Fulfill the 
 
 - For grid use bootstrap 5
 - For modal use [react-modal](https://www.npmjs.com/package/react-modal)
-- For central data management use react context api
-- For color switch use pu re css
+- For central data management use react 
 - For custom color picker use :  [react-color](https://casesandberg.github.io/react-color/)
 - Suggested folder structure: [outline](https://github.com/outline/outline)
 - For icon : [react-icons](https://react-icons.github.io/react-icons/search)
@@ -33,6 +32,9 @@ Build a React app that is functionally similar to the given assets. Fulfill the 
 - For date format use just js
 - hooks might need to use useState, useEffect, useContext, useRef
 - For from validation use: [validator](https://www.npmjs.com/package/validator)
+- For unique id use : [uuid](https://www.npmjs.com/package/uuid)
+- For contrast color use : [is-dark-color](https://www.npmjs.com/package/is-dark-color)
+- For text truncate use : [react-text-truncate](https://www.npmjs.com/package/react-text-truncate)
 
 ## Design:
 [figma file](https://www.figma.com/file/IvOfFOSJV4ZsLtMpXAk4jz/Notes?node-id=0%3A1)
