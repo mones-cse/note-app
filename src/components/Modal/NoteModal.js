@@ -91,11 +91,8 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         }
     }, [noteTitle, noteDetails]);
 
-    const disabled = () => {
-        if (noteTitleError.length > 0 || noteDetailsError.length > 0) {
-            return "btn btn-lg btn-dark disabled";
-        }
-        return "btn btn-lg btn-dark";
+    const isDisabled = () => {
+        return  noteTitleError.trim().length > 0 || noteDetailsError.trim().length > 0 ? true :false;
     };
 
     const notify = (msg) => {
@@ -181,9 +178,9 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                         <ColorPickers color={color} setColor={setColor} />
                         <div className={"ms-auto"}>
                             {isTypeUpdate ? (
-                                <button className={disabled()}>Update</button>
+                                <button  disabled={isDisabled()} className={"btn btn-lg btn-dark"}>Update</button>
                             ) : (
-                                <button className={disabled()}>Save</button>
+                                <button disabled={isDisabled()} className={"btn btn-lg btn-dark"}>Save</button>
                             )}
                         </div>
                     </div>
