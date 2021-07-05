@@ -5,8 +5,8 @@ import ColorPickers from "../ColorPicker/ColorPicker";
 import "./NoteModal.scss";
 import NotesContext from "../../context/NotesContext";
 import validator from "validator";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 Modal.setAppElement("#root");
 
@@ -18,9 +18,19 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
     const [isNoteStar, setIsNoteStar] = useState(false);
     const currentDate = new Date();
 
+    const [isNoteTitleClicked, setIsNoteTitleClicked] = useState(false);
+    const [isNoteDetailsClicked, setIsNoteDetailsClicked] = useState(false);
     const [noteTitleError, setNoteTitleError] = useState("");
     const [noteDetailsError, setNoteDetailsError] = useState("");
 
+    const noteTitleChangeHandler = event => {
+        setIsNoteTitleClicked(true);
+        setNoteTitle(event.target.value);
+    };
+    const noteDetailsChangeHandler = event => {
+        setIsNoteDetailsClicked(true);
+        setNoteDetails(event.target.value);
+    };
     const handleSubmit = event => {
         event.preventDefault();
         const note = {};
@@ -32,10 +42,10 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         if (isTypeUpdate) {
             note.id = selectedNote.id;
             noteCtx.updateNote(note);
-            notify('Note updated');
+            notify("Note updated");
         } else {
             noteCtx.addNote(note);
-            notify('Note Added');
+            notify("Note Added");
         }
         handleCloseModal();
     };
@@ -61,16 +71,16 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         stateValueReset();
         closeModal(false);
     };
-    const stateValueReset =()=>{
+    const stateValueReset = () => {
         setColor("#FFC971");
         setNoteTitle("");
         setNoteDetails("");
         setIsNoteStar(false);
+        setIsNoteTitleClicked(false);
+        setIsNoteDetailsClicked(false);
     };
-
     const afterOpenModal = () => {
         if (isTypeUpdate) {
-            console.log("after modal open", selectedNote);
             setColor(selectedNote.color);
             setIsNoteStar(selectedNote.isNoteStar);
             setNoteTitle(selectedNote.noteTitle);
@@ -79,12 +89,18 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
     };
 
     useEffect(() => {
-        if (!validator.isLength(noteTitle, { min: 1, max: 100 })) {
+        if (
+            !validator.isLength(noteTitle.trim(), { min: 1, max: 100 }) &&
+            isNoteTitleClicked
+        ) {
             setNoteTitleError("Title length can't be more than 100");
         } else {
             setNoteTitleError("");
         }
-        if (!validator.isLength(noteDetails, { min: 1, max: 1000 })) {
+        if (
+            !validator.isLength(noteDetails.trim(), { min: 1, max: 1000 }) &&
+            isNoteDetailsClicked
+        ) {
             setNoteDetailsError("Details length can't be more than 1000");
         } else {
             setNoteDetailsError("");
@@ -92,11 +108,14 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
     }, [noteTitle, noteDetails]);
 
     const isDisabled = () => {
-        return  noteTitleError.trim().length > 0 || noteDetailsError.trim().length > 0 ? true :false;
+        return noteTitleError.trim().length > 0 ||
+            noteDetailsError.trim().length > 0
+            ? true
+            : false;
     };
 
-    const notify = (msg) => {
-        toast.info(msg?msg:"No Proper Message",{autoClose: 3000});
+    const notify = msg => {
+        toast.info(msg ? msg : "No Proper Message", { autoClose: 3000 });
     };
 
     return (
@@ -107,10 +126,12 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
             style={customStyles}
             contentLabel="Example Modal"
         >
-
             <div className={"container custom-modal"}>
                 <p className={"w-100 text-center note-title"}>New Note</p>
-                <IoCloseSharp className={"note-close"} onClick={closeModal} />
+                <IoCloseSharp
+                    className={"note-close"}
+                    onClick={handleCloseModal}
+                />
                 <form onSubmit={handleSubmit}>
                     <p className={"note-date mt-4"}>
                         {currentDate.toDateString()}
@@ -124,7 +145,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                             className="form-control"
                             id="noteTitle"
                             value={noteTitle}
-                            onChange={event => setNoteTitle(event.target.value)}
+                            onChange={noteTitleChangeHandler}
                         />
                         {noteTitleError.length > 0 && (
                             <div id="" className="form-text text-danger">
@@ -146,9 +167,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                             id="noteTitleDetails"
                             style={{ height: "158px" }}
                             value={noteDetails}
-                            onChange={event =>
-                                setNoteDetails(event.target.value)
-                            }
+                            onChange={noteDetailsChangeHandler}
                         />
                         {noteDetailsError.length > 0 && (
                             <div id="" className="form-text text-danger">
@@ -178,9 +197,19 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
                         <ColorPickers color={color} setColor={setColor} />
                         <div className={"ms-auto"}>
                             {isTypeUpdate ? (
-                                <button  disabled={isDisabled()} className={"btn btn-lg btn-dark"}>Update</button>
+                                <button
+                                    disabled={isDisabled()}
+                                    className={"btn btn-lg btn-dark"}
+                                >
+                                    Update
+                                </button>
                             ) : (
-                                <button disabled={isDisabled()} className={"btn btn-lg btn-dark"}>Save</button>
+                                <button
+                                    disabled={isDisabled()}
+                                    className={"btn btn-lg btn-dark"}
+                                >
+                                    Save
+                                </button>
                             )}
                         </div>
                     </div>
