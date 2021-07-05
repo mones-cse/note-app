@@ -5,6 +5,8 @@ import ColorPickers from "../ColorPicker/ColorPicker";
 import "./NoteModal.scss";
 import NotesContext from "../../context/NotesContext";
 import validator from "validator";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 Modal.setAppElement("#root");
 
@@ -30,9 +32,12 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         if (isTypeUpdate) {
             note.id = selectedNote.id;
             noteCtx.updateNote(note);
+            notify('Note updated');
         } else {
             noteCtx.addNote(note);
+            notify('Note Added');
         }
+
     };
 
     const customStyles = {
@@ -85,6 +90,10 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
         return "btn btn-lg btn-dark";
     };
 
+    const notify = (msg) => {
+        toast.info(msg?msg:"No Proper Message",{autoClose: 3000});
+    };
+
     return (
         <Modal
             isOpen={isModalOpen}
@@ -93,6 +102,7 @@ const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
             style={customStyles}
             contentLabel="Example Modal"
         >
+
             <div className={"container custom-modal"}>
                 <p className={"w-100 text-center note-title"}>New Note</p>
                 <IoCloseSharp className={"note-close"} onClick={closeModal} />

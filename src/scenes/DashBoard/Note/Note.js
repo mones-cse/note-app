@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { GiAlliedStar } from "react-icons/gi";
 import { FiTrash } from "react-icons/fi";
 import { RiEditCircleFill } from "react-icons/ri";

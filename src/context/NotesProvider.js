@@ -38,7 +38,7 @@ const NotesProvider = props => {
                     const noteIndex = tempNotes.findIndex(
                         each => each.id === id
                     );
-                    if (noteIndex != -1) {
+                    if (noteIndex !== -1) {
                         tempNotes.splice(noteIndex, 1);
                         setNotes(notes => tempNotes);
                     }
@@ -49,7 +49,7 @@ const NotesProvider = props => {
                     const noteIndex = tempNotes.findIndex(
                         each => each.id === note.id
                     );
-                    if (noteIndex != -1) {
+                    if (noteIndex !== -1) {
                         tempNotes[noteIndex] = note;
                         setNotes(notes => tempNotes);
                     }
