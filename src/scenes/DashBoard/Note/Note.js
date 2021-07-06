@@ -6,14 +6,26 @@ import "./note.scss";
 import NotesContext from "../../../context/NotesContext";
 import TextTruncate from "react-text-truncate";
 import ModalContext from "../../../context/ModalContext";
+import ConfirmationContext from "../../../context/ConfirmationContext";
 
 const Note = ({ note }) => {
     const notesCtx = useContext(NotesContext);
     const modalCtx = useContext(ModalContext);
+    const confirmationCtx = useContext(ConfirmationContext);
     const noteModalHandler = ()=>{
         modalCtx.setIsTypeUpdate(true);
         modalCtx.setSelectedNote(note);
         modalCtx.openModal();
+    };
+    const deleteModalHandler = ()=>{
+        console.log('delete modal');
+        confirmationCtx.openModal();
+        confirmationCtx.setCustomFunction(()=>deleteNote);
+        //following code delete the note
+        //notesCtx.deleteNote(note.id);
+    } ;
+    const deleteNote = () =>{
+        notesCtx.deleteNote(note.id);
     };
     return (
         <div className={"note-container col-lg-4 col-md-6"}>
@@ -43,8 +55,8 @@ const Note = ({ note }) => {
                     </p>
                     <FiTrash
                         className={"note-delete"}
-                        onClick={() => notesCtx.deleteNote(note.id)}
-                    q/>
+                        onClick={deleteModalHandler}
+                    />
                     <RiEditCircleFill
                         className={"note-update"}
                         onClick={() => noteModalHandler(note)}
