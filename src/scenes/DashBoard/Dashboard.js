@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import NotesContext from "../../context/NotesContext";
-import NoteModal from "../../components/Modal/NoteModal";
 import Note from "./Note/Note";
 import { RiSearchLine } from "react-icons/ri";
 
@@ -10,18 +9,6 @@ const Dashboard = () => {
     const [searchText, setSearchText] = useState("");
     const [filteredNotes, setFilteredNotes] = useState(notes);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedNote, setSelectedNote] = useState();
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-    const noteModalHandler = note => {
-        setSelectedNote(note);
-        openModal();
-    };
 
     useEffect(() => {
         let tempNote = [...notes];
@@ -65,19 +52,10 @@ const Dashboard = () => {
                         <Note
                             key={note.id}
                             note={note}
-                            openModal={openModal}
-                            noteModalHandler={noteModalHandler}
                         />
                     ))}
                 </div>
             </div>
-
-            <NoteModal
-                isModalOpen={isModalOpen}
-                closeModal={closeModal}
-                isTypeUpdate={true}
-                selectedNote={selectedNote}
-            />
         </div>
     );
 };

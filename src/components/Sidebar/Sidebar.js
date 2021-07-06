@@ -1,20 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import NotesContext from "../../context/NotesContext";
 import Logo from "../../assets/logo.svg";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { GiAlliedStar } from "react-icons/gi";
-import NoteModal from "../Modal/NoteModal";
+import ModalContext from "../../context/ModalContext";
 
 const Sidebar = () => {
     const noteCtx = useContext(NotesContext);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const openModal = () => {
-        setIsModalOpen(true);
+    const modalCtx = useContext(ModalContext);
+    const addNoteHandler = () =>{
+        modalCtx.setIsTypeUpdate(false);
+        modalCtx.openModal();
     };
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
     return (
         <div className={"col-1 min-vh-100 text-center border-end"}>
             <img className={"mt-5"} src={Logo} alt="" />
@@ -28,11 +25,8 @@ const Sidebar = () => {
             <AiFillPlusCircle
                 className={"mt-2"}
                 size="58px"
-                onClick={openModal}
+                onClick={addNoteHandler}
             />
-
-
-            <NoteModal isModalOpen={isModalOpen} closeModal={closeModal} isTypeUpdate={false}/>
         </div>
     );
 };

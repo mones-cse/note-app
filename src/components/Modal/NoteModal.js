@@ -10,14 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 Modal.setAppElement("#root");
 
-const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate, selectedNote }) => {
+const NoteModal = ({ isModalOpen, closeModal, isTypeUpdate ,selectedNote}) => {
     const noteCtx = useContext(NotesContext);
     const [color, setColor] = useState("#FFC971");
     const [noteTitle, setNoteTitle] = useState("");
     const [noteDetails, setNoteDetails] = useState("");
     const [isNoteStar, setIsNoteStar] = useState(false);
-    // const currentDate = new Date();
-
     const [isNoteTitleClicked, setIsNoteTitleClicked] = useState(false);
     const [isNoteDetailsClicked, setIsNoteDetailsClicked] = useState(false);
     const [noteTitleError, setNoteTitleError] = useState("");

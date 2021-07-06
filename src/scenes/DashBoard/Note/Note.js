@@ -5,10 +5,16 @@ import { RiEditCircleFill } from "react-icons/ri";
 import "./note.scss";
 import NotesContext from "../../../context/NotesContext";
 import TextTruncate from "react-text-truncate";
+import ModalContext from "../../../context/ModalContext";
 
-const Note = ({ note, noteModalHandler }) => {
+const Note = ({ note }) => {
     const notesCtx = useContext(NotesContext);
-
+    const modalCtx = useContext(ModalContext);
+    const noteModalHandler = ()=>{
+        modalCtx.setIsTypeUpdate(true);
+        modalCtx.setSelectedNote(note);
+        modalCtx.openModal();
+    };
     return (
         <div className={"note-container col-lg-4 col-md-6"}>
             <div className={"card"} style={{ backgroundColor: note.color }}>
@@ -22,16 +28,7 @@ const Note = ({ note, noteModalHandler }) => {
                     >
                         {note.noteTitle}
                     </p>
-                    {/*todo TextTruncate bug*/}
-                    {/*<div  className={"note-title vw-100"}>*/}
-                    {/*    <TextTruncate*/}
-                    {/*        line={1}*/}
-                    {/*        element="span"*/}
-                    {/*        truncateText="…"*/}
-                    {/*        text={note.noteTitle}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-                    {/*<p className={"note-body text-"}> {note.noteDetails} </p>*/}
+
                     <div className={"note-body"}>
                         <TextTruncate
                             line={6}
