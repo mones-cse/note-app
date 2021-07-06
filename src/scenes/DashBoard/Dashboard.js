@@ -12,7 +12,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         let tempNote = [...notes];
-        console.log(tempNote);
         if (isFavOn) {
             tempNote = tempNote.filter(note => note.isNoteStar === true);
         }

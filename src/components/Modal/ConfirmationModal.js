@@ -1,4 +1,3 @@
-import React from "react";
 import Modal from "react-modal";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiFillWarning } from "react-icons/ai";
@@ -8,14 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "./ConfirmationModal.scss";
 
 const ConfirmationModal = props => {
-    console.log({ props });
     const afterOpenModal = () => {};
     const handleCloseModal = () => {
         props.closeModal(false);
-        props.setCustomFunction(()=>{});
+        props.setCustomFunction(() => {});
     };
     const handleConfirmation = () => {
-        console.log("handle confirmation here");
         props.customFunction();
         notify("Note deleted");
         props.closeModal(false);

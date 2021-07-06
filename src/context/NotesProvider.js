@@ -22,7 +22,7 @@ const NotesProvider = props => {
         <NotesContext.Provider
             value={{
                 notes: notes,
-                isFavOn:isFavOn,
+                isFavOn: isFavOn,
                 toggleFav: () => {
                     setIsFavOn(!isFavOn);
                 },
@@ -33,7 +33,6 @@ const NotesProvider = props => {
                     setNotes(notes => [...notes, temp]);
                 },
                 deleteNote: id => {
-                    console.log("delete note called", id);
                     let tempNotes = [...notes];
                     const noteIndex = tempNotes.findIndex(
                         each => each.id === id

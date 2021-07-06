@@ -39,16 +39,19 @@ function App() {
                         )}
                     </ModalContext.Consumer>
                     <ConfirmationContext.Consumer>
-                        {confirmationCtx =>{
-                         console.log("in app.js", { confirmationCtx });
-                            return((
-                             <ConfirmationModal
-                                 isModalOpen={confirmationCtx.isModalOpen}
-                                 closeModal={confirmationCtx.closeModal}
-                                 customFunction={confirmationCtx.customFunction}
-                                 setCustomFunction={confirmationCtx.setCustomFunction}
-                             />
-                         ));
+                        {confirmationCtx => {
+                            return (
+                                <ConfirmationModal
+                                    isModalOpen={confirmationCtx.isModalOpen}
+                                    closeModal={confirmationCtx.closeModal}
+                                    customFunction={
+                                        confirmationCtx.customFunction
+                                    }
+                                    setCustomFunction={
+                                        confirmationCtx.setCustomFunction
+                                    }
+                                />
+                            );
                         }}
                     </ConfirmationContext.Consumer>
                 </ConfirmationProvider>

@@ -12,19 +12,16 @@ const Note = ({ note }) => {
     const notesCtx = useContext(NotesContext);
     const modalCtx = useContext(ModalContext);
     const confirmationCtx = useContext(ConfirmationContext);
-    const noteModalHandler = ()=>{
+    const noteModalHandler = () => {
         modalCtx.setIsTypeUpdate(true);
         modalCtx.setSelectedNote(note);
         modalCtx.openModal();
     };
-    const deleteModalHandler = ()=>{
-        console.log('delete modal');
+    const deleteModalHandler = () => {
         confirmationCtx.openModal();
-        confirmationCtx.setCustomFunction(()=>deleteNote);
-        //following code delete the note
-        //notesCtx.deleteNote(note.id);
-    } ;
-    const deleteNote = () =>{
+        confirmationCtx.setCustomFunction(() => deleteNote);
+    };
+    const deleteNote = () => {
         notesCtx.deleteNote(note.id);
     };
     return (
