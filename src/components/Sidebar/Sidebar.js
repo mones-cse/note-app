@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
+
+import ModalContext from "../../context/ModalContext";
 import NotesContext from "../../context/NotesContext";
+
 import Logo from "../../assets/logo.svg";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { GiAlliedStar } from "react-icons/gi";
-import ModalContext from "../../context/ModalContext";
 
 const Sidebar = () => {
     const noteCtx = useContext(NotesContext);
     const modalCtx = useContext(ModalContext);
-    const addNoteHandler = () =>{
+    const addNoteHandler = () => {
         modalCtx.setIsTypeUpdate(false);
         modalCtx.openModal();
     };
@@ -23,7 +25,7 @@ const Sidebar = () => {
             />
             <br />
             <AiFillPlusCircle
-                className={"mt-2"}
+                className={"mt-3"}
                 size="58px"
                 onClick={addNoteHandler}
             />

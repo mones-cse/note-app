@@ -4,15 +4,15 @@ import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./scenes/DashBoard/Dashboard";
 
+import ModalContext from "./context/ModalContext";
+import ConfirmationContext from "./context/ConfirmationContext";
+
 import NotesProvider from "./context/NotesProvider";
 import ModalProvider from "./context/ModalProvider";
 import ConfirmationProvider from "./context/ConfirmationProvider";
 
 import NoteModal from "./components/Modal/NoteModal";
 import ConfirmationModal from "./components/Modal/ConfirmationModal";
-
-import ModalContext from "./context/ModalContext";
-import ConfirmationContext from "./context/ConfirmationContext";
 
 function App() {
     return (
@@ -24,9 +24,9 @@ function App() {
                             <Sidebar />
                             <Dashboard />
                         </div>
-                        <ToastContainer />
                     </div>
-                    {/*why use consumer insted of useContext hooks*/}
+                    <ToastContainer />
+                    {/*why use consumer instead of useContext hooks*/}
                     {/*https://stackoverflow.com/questions/60878229/how-to-provide-and-consume-context-in-the-same-component*/}
                     <ModalContext.Consumer>
                         {modalCtx => (

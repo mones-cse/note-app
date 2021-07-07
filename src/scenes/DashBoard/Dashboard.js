@@ -9,6 +9,9 @@ const Dashboard = () => {
     const [searchText, setSearchText] = useState("");
     const [filteredNotes, setFilteredNotes] = useState(notes);
 
+    const searchTextHandler = event => {
+        setSearchText(event.target.value);
+    };
 
     useEffect(() => {
         let tempNote = [...notes];
@@ -40,7 +43,7 @@ const Dashboard = () => {
                         aria-label="Username"
                         aria-describedby="addon-wrapping"
                         value={searchText}
-                        onChange={event => setSearchText(event.target.value)}
+                        onChange={searchTextHandler}
                     />
                 </div>
             </div>
@@ -48,10 +51,7 @@ const Dashboard = () => {
                 <h2 className={"mb-4 mt-2"}>Notes</h2>
                 <div className={"row gx-3"}>
                     {filteredNotes.map(note => (
-                        <Note
-                            key={note.id}
-                            note={note}
-                        />
+                        <Note key={note.id} note={note} />
                     ))}
                 </div>
             </div>
