@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
+import AlertConfirmation from "../../../components/Modal/AlertConfirmation";
 import { GiAlliedStar } from "react-icons/gi";
 import { FiTrash } from "react-icons/fi";
-import { RiEditCircleFill } from "react-icons/ri";
+import { RiEditCircleFill, } from "react-icons/ri";
+import { AiFillWarning, } from "react-icons/ai";
 import "./note.scss";
 import NotesContext from "../../../context/NotesContext";
 import TextTruncate from "react-text-truncate";
 import ModalContext from "../../../context/ModalContext";
 import ConfirmationContext from "../../../context/ConfirmationContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Note = ({ note }) => {
     const notesCtx = useContext(NotesContext);
@@ -18,11 +22,22 @@ const Note = ({ note }) => {
         modalCtx.openModal();
     };
     const deleteModalHandler = () => {
-        confirmationCtx.openModal();
-        confirmationCtx.setCustomFunction(() => deleteNote);
+        AlertConfirmation({
+            title: "Are you sure?",
+            description: "One you delete. This can't be undone",
+            icon: <AiFillWarning size={100} color={"red"} />,
+            onConfirmation: deleteNote,
+
+        });
+        // confirmationCtx.openModal();
+        // confirmationCtx.setCustomFunction(() => deleteNote);
     };
     const deleteNote = () => {
         notesCtx.deleteNote(note.id);
+        notify("Note deleted");
+    };
+    const notify = msg => {
+        toast.warn(msg ? msg : "No Proper Message", { autoClose: 3000 });
     };
     return (
         <div className={"note-container col-lg-4 col-md-6"}>

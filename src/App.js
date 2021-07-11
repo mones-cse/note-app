@@ -12,7 +12,6 @@ import ModalProvider from "./context/ModalProvider";
 import ConfirmationProvider from "./context/ConfirmationProvider";
 
 import NoteModal from "./components/Modal/NoteModal";
-import ConfirmationModal from "./components/Modal/ConfirmationModal";
 
 function App() {
     return (
@@ -38,22 +37,6 @@ function App() {
                             />
                         )}
                     </ModalContext.Consumer>
-                    <ConfirmationContext.Consumer>
-                        {confirmationCtx => {
-                            return (
-                                <ConfirmationModal
-                                    isModalOpen={confirmationCtx.isModalOpen}
-                                    closeModal={confirmationCtx.closeModal}
-                                    customFunction={
-                                        confirmationCtx.customFunction
-                                    }
-                                    setCustomFunction={
-                                        confirmationCtx.setCustomFunction
-                                    }
-                                />
-                            );
-                        }}
-                    </ConfirmationContext.Consumer>
                 </ConfirmationProvider>
             </ModalProvider>
         </NotesProvider>
